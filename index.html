@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goodreads | Meet your next favorite book</title>
+  <meta
+    content="Find and read more books you'll love, and keep track of the books you want to read. Be part of the world's largest community of book lovers on Goodreads."
+    name="description">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #4a854a;
+      --secondary-color: #755b43;
+      --accent-color: #f4f1ea;
+      --dark-color: #382110;
+      --light-color: #f9f7f4;
+      --text-color: #333333;
+      --light-text: #666666;
+      --border-color: #e6e1d8;
+      --header-bg: #f4f1ea;
+      --button-radius: 3px;
+      --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Lato', sans-serif;
+      background-color: var(--light-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Merriweather', serif;
+      color: var(--dark-color);
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--secondary-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--header-bg);
+      box-shadow: var(--box-shadow);
+      position: relative;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    /* Hero Section */
+    .hero {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/api/placeholder/1200/300');
+      background-color: rgba(90, 69, 24, 255);
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 700px;
+      margin: 0 auto 30px;
+    }
+
+    /* Sign-up Box */
+    .signup-box {
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: var(--box-shadow);
+    }
+
+    .signup-box h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .auth-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border-radius: var(--button-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .amazon-button {
+      background-color: #FF9900;
+      color: white;
+      border: none;
+    }
+
+    .amazon-button:hover {
+      background-color: #e68a00;
+    }
+
+    .apple-button {
+      background-color: #000;
+      color: white;
+      border: none;
+    }
+
+    .apple-button:hover {
+      background-color: #333;
+    }
+
+    .email-button {
+      background-color: var(--dark-color);
+      color: white;
+      border: none;
+    }
+
+    .email-button:hover {
+      background-color: #4e321c;
+    }
+
+    .button-icon {
+      margin-right: 10px;
+    }
+
+    .legal-text {
+      font-size: 12px;
+      color: var(--light-text);
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .sign-in-prompt {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 60px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .feature-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .feature-card h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    /* Discovery Box */
+    .discovery-box {
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 50px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .discovery-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+    }
+
+    .discovery-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .source-books {
+      flex: 2;
+    }
+
+    .source-title {
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .arrow {
+      flex: 1;
+      text-align: center;
+      font-size: 24px;
+      color: var(--secondary-color);
+    }
+
+    .result-book {
+      flex: 1;
+      text-align: center;
+    }
+
+    .result-title {
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .book-tags {
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: var(--light-text);
+    }
+
+    .book-image {
+      width: 100%;
+      height: auto;
+      max-width: 120px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .book-image:hover {
+      transform: scale(1.05);
+    }
+
+    /* Search Box */
+    .search-box {
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      margin-bottom: 50px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .search-box h2 {
+      margin-bottom: 20px;
+    }
+
+    .search-form {
+      display: flex;
+      border: 1px solid var(--border-color);
+      border-radius: var(--button-radius);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .search-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .search-button:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Genre Grid */
+    .genre-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .genre-link {
+      padding: 5px 0;
+      transition: transform 0.2s ease;
+    }
+
+    .genre-link:hover {
+      transform: translateX(5px);
+    }
+
+    /* Quotes Section */
+    .quotes-section {
+      background-color: var(--accent-color);
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .quote-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .quote-container h2 {
+      margin-bottom: 30px;
+    }
+
+    .quote-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .quote-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 30px;
+    }
+
+    .quote-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .quote-text {
+      font-family: 'Merriweather', serif;
+      font-size: 20px;
+      line-height: 1.6;
+      font-style: italic;
+      text-align: left;
+    }
+
+    .quote-author {
+      display: block;
+      font-family: 'Lato', sans-serif;
+      font-style: normal;
+      margin-top: 15px;
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+
+    /* Reading Challenge Section */
+    .challenge-section {
+      padding: 60px 0;
+    }
+
+    .challenge-container {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: var(--box-shadow);
+    }
+
+    .challenge-image {
+      flex: 1;
+      text-align: center;
+    }
+
+    .challenge-image img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .challenge-content {
+      flex: 2;
+      padding-left: 40px;
+    }
+
+    .challenge-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .challenge-button {
+      display: inline-block;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 12px 25px;
+      border-radius: var(--button-radius);
+      font-weight: 600;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .challenge-button:hover {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 50px 0 20px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .footer-links a {
+      display: block;
+      color: #ccc;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+
+      .features-grid,
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .genre-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .challenge-container {
+        flex-direction: column;
+      }
+
+      .challenge-image {
+        margin-bottom: 30px;
+      }
+
+      .challenge-content {
+        padding-left: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .discovery-row {
+        flex-direction: column;
+      }
+
+      .source-books,
+      .arrow,
+      .result-book {
+        margin-bottom: 20px;
+      }
+
+      .book-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+        margin: 20px 0;
+      }
+
+      .genre-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-container {
+        flex-direction: column;
+      }
+
+      .features-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .book-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .quote-content {
+        flex-direction: column;
+      }
+
+      .quote-avatar {
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+
+      .quote-text {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container header-container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="images/header_logo-8d96d7078a3d63f9f31d92282fd67cf4.png"
+            alt="Goodreads: Book reviews, recommendations, and discussion">
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Discover & read more</h1>
+      <p>Find and read more books you'll love, and keep track of the books you want to read. Be part of the world's
+        largest community of book lovers on Goodreads.</p>
+
+      <div class="signup-box">
+        <h2>Join Goodreads</h2>
+        <button class="auth-button amazon-button"
+          style="background-color: #ff9900; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer;">
+          <a href="https://na.account.amazon.com/ap/signin?_encoding=UTF8&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.pape.max_auth_age=0&ie=UTF8&openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&pageId=lwa&openid.assoc_handle=amzn_lwa_na&marketPlaceId=ATVPDKIKX0DER&arb=91ada9e0-0093-4a85-83e9-411b76fa6d77&language=en_US&openid.return_to=https%3A%2F%2Fna.account.amazon.com%2Fap%2Foa%3FmarketPlaceId%3DATVPDKIKX0DER%26arb%3D91ada9e0-0093-4a85-83e9-411b76fa6d77%26language%3Den_US&enableGlobalAccountCreation=1&metricIdentifier=amzn1.application.7ff8a2be5dae490b9914b4f430ca5c4c&signedMetricIdentifier=pjdsmDnaXhj%2FNbw9hCvWIQvTgX0htu%2BjAbCBVOtDWHM%3D"
+            target="_blank" rel="noopener noreferrer"
+            style="color: white; text-decoration: none; font-weight: 600; display: flex; align-items: center; justify-content: center;">
+            <span class="button-icon" style="margin-right: 8px;">
+              <i class="gr-button--amazon__icon"></i>
+            </span>
+            Continue with Amazon
+          </a>
+        </button>
+        <button class="auth-button apple-button">
+          <a href="https://appleid.apple.com/auth/authorize?scope=name+email&response_type=code+id_token&redirect_uri=https%3A%2F%2Fwww.goodreads.com%2Fap%2F3p_callback%3FidentityProvider%3DAPPLE%26relyingParty%3DGOODREADS%26request%3Dsignin%26openid.assoc_handle%3Damzn_goodreads_web_apple%26openid.mode%3Dcheckid_setup%26openid.ns%3Dhttp%253A%252F%252Fspecs.openid.net%252Fauth%252F2.0%26openid.ns.oa2%3Dhttp%253A%252F%252Fwww.amazon.com%252Fap%252Fext%252Foauth%252F2%26openid.oa2.scope%3Dauth_code%26openid.oa2.client_id%3Diba%253Aamzn1.application-oa2-client.ce5075dead7c4aa7ae316059988839d5%26openid.oa2.response_type%3Dcode%26openid.return_to%3Dhttps%253A%252F%252Fwww.goodreads.com%252Fap-handler%252Fsign-in%253FIDP%253Dapple&code_challenge_method=S256&state=ebac0dcb-74df-465d-94c6-98f746998222.0LKhIyHe_Dnw4jSzVDpL1NNMeDR4WSPKEFC5vVN9ty0%3D&client_id=com.goodreads.app&code_challenge=qOJNdyUGLd39okETsATspfPFPEgzPhyrOsDeGTlnphY&response_mode=form_post"
+            style="color: white">
+            <span class="button-icon">
+              <i class="gr-button--apple__icon"></i>
+            </span>
+            Continue with Apple
+          </a>
+        </button>
+        <button class="auth-button email-button">
+          <a href="https://www.goodreads.com/ap/register?language=en_US&openid.assoc_handle=amzn_goodreads_web_na&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.return_to=https%3A%2F%2Fwww.goodreads.com%2Fap-handler%2Fregister&siteState=eyJyZXR1cm5fdXJsIjoiaHR0cHM6Ly93d3cuZ29vZHJlYWRzLmNvbS8ifQ%3D%3D"
+            style="color: white">
+            Sign up with email
+          </a>
+        </button>
+
+        <div class="legal-text">
+          By creating an account, you agree to the Goodreads
+          <a href="https://www.goodreads.com/about/terms" target="_blank" rel="noopener noreferrer"><br>Terms of
+            Service</a>
+          and
+          <a href="https://www.goodreads.com/about/privacy" target="_blank" rel="noopener noreferrer">Privacy
+            Policy</a>.
+        </div>
+
+        <div class="sign-in-prompt">
+          <a href="https://www.goodreads.com/user/sign_in">
+            <h5>Already a member? Sign In</h5>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card">
+          <h2>Deciding what to read next?</h2>
+          <p>You're in the right place. Tell us what titles or genres you've enjoyed in the past, and we'll give you
+            surprisingly insightful recommendations.</p>
+        </div>
+        <div class="feature-card">
+          <h2>What are your friends reading?</h2>
+          <p>Chances are your friends are discussing their favorite (and least favorite) books on Goodreads.</p>
+        </div>
+      </div>
+
+      <div class="discovery-box">
+        <h2>What will <em>you</em> discover?</h2>
+
+        <div class="discovery-row">
+          <div class="source-books">
+            <p class="source-title">Because Brian liked:</p>
+            <div class="book-grid">
+              <div class="book-item">
+                <a href="/book/show/3450744-nudge">
+                  <img class="book-image" src="images/3450744._SX98_.jpg" alt="Nudge by Richard H. Thaler">
+                </a>
+              </div>
+              <div class="book-item">
+                <a href="/book/show/2776527-traffic">
+                  <img class="book-image" src="images/2776527._SX98_.jpg" alt="Traffic by Tom Vanderbilt">
+                </a>
+              </div>
+              <div class="book-item">
+                <a href="/book/show/1713426.Predictably_Irrational">
+                  <img class="book-image" src="images/1713426._SX98_.jpg" alt="Predictably Irrational by Dan Ariely">
+                </a>
+              </div>
+              <div class="book-item">
+                <a href="/book/show/1618.The_Curious_Incident_of_the_Dog_in_the_Night_Time">
+                  <img class="book-image" src="images/1618._SX98_.jpg"
+                    alt="The Curious Incident of the Dog in the Night-Time by Mark Haddon">
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="result-book">
+            <p class="result-title">He discovered:</p>
+            <p class="book-tags">Decision-making, Sociology, Marketing</p>
+            <a href="/book/show/11468377-thinking-fast-and-slow">
+              <img class="book-image" src="images/11468377._SX98_.jpg" alt="Thinking, Fast and Slow by Daniel Kahneman">
+            </a>
+          </div>
+        </div>
+
+        <div class="discovery-row">
+          <div class="source-books">
+            <p class="source-title">Because Shomeret liked:</p>
+            <div class="book-grid" style="grid-template-columns: repeat(3, 1fr);">
+              <div class="book-item">
+                <a href="/book/show/7366.Animals_in_Translation">
+                  <img class="book-image" src="images/7366._SX98_.jpg" alt="Animals in Translation by Temple Grandin">
+                </a>
+              </div>
+              <div class="book-item">
+                <a href="/book/show/4386485-animals-make-us-human">
+                  <img class="book-image" src="images/4386485._SX98_.jpg" alt="Animals Make Us Human by Temple Grandin">
+                </a>
+              </div>
+              <div class="book-item">
+                <a href="/book/show/6953508-some-we-love-some-we-hate-some-we-eat">
+                  <img class="book-image" src="images/6953508._SX98_.jpg"
+                    alt="Some We Love, Some We Hate, Some We Eat by Hal Herzog">
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="arrow">→</div>
+
+          <div class="result-book">
+            <p class="result-title">She discovered:</p>
+            <p class="book-tags">Psychology, Animals, Science, Nature</p>
+            <a href="/book/show/325779.Next_of_Kin">
+              <img class="book-image" src="images/325779._SX98_.jpg" alt="Next of Kin by Roger Fouts">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="search-box">
+        <h2>Search and browse books</h2>
+        <form class="search-form" id="headerSearchForm" action="/search" method="get">
+          <input type="text" name="query" class="search-input" placeholder="Title / Author / ISBN"
+            id="sitesearch_field">
+          <button type="submit" class="search-button">
+            <img width="16" alt="search" src="images/magnifying_glass-a2d7514d50bcee1a0061f1ece7821750.png">
+          </button>
+        </form>
+
+        <div class="genre-grid">
+          <a class="genre-link" href="/genres/art">Art</a>
+          <a class="genre-link" href="/genres/biography">Biography</a>
+          <a class="genre-link" href="/genres/business">Business</a>
+          <a class="genre-link" href="/genres/children-s">Children's</a>
+          <a class="genre-link" href="/genres/christian">Christian</a>
+          <a class="genre-link" href="/genres/classics">Classics</a>
+          <a class="genre-link" href="/genres/comics">Comics</a>
+          <a class="genre-link" href="/genres/cookbooks">Cookbooks</a>
+          <a class="genre-link" href="/genres/ebooks">Ebooks</a>
+          <a class="genre-link" href="/genres/fantasy">Fantasy</a>
+          <a class="genre-link" href="/genres/fiction">Fiction</a>
+          <a class="genre-link" href="/genres/graphic-novels">Graphic Novels</a>
+          <a class="genre-link" href="/genres/historical-fiction">Historical Fiction</a>
+          <a class="genre-link" href="/genres/history">History</a>
+          <a class="genre-link" href="/genres/horror">Horror</a>
+          <a class="genre-link" href="/genres/memoir">Memoir</a>
+          <a class="genre-link" href="/genres/music">Music</a>
+          <a class="genre-link" href="/genres/mystery">Mystery</a>
+          <a class="genre-link" href="/genres/non-fiction">Nonfiction</a>
+          <a class="genre-link" href="/genres/poetry">Poetry</a>
+          <a class="genre-link" href="/genres/psychology">Psychology</a>
+          <a class="genre-link" href="/genres/romance">Romance</a>
+          <a class="genre-link" href="/genres/science">Science</a>
+          <a class="genre-link" href="/genres/science-fiction">Science Fiction</a>
+          <a class="genre-link" href="/genres/self-help">Self Help</a>
+          <a class="genre-link" href="/genres/sports">Sports</a>
+          <a class="genre-link" href="/genres/thriller">Thriller</a>
+          <a class="genre-link" href="/genres/travel">Travel</a>
+          <a class="genre-link" href="/genres/young-adult">Young Adult</a>
+          <a class="genre-link" href="/genres"><strong>More genres</strong></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quotes-section">
+    <div class="container">
+      <div class="quote-container">
+        <h2>Quotes</h2>
+        <div class="quote-content">
+          <div class="quote-avatar">
+            <img src="images/3565._UX200_CR0%2C15%2C200%2C200_.jpg" alt="Oscar Wilde">
+          </div>
+          <div class="quote-text">
+            Be yourself; everyone else is already taken.
+            <span class="quote-author">Oscar Wilde</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="challenge-section">
+    <div class="container">
+      <div class="challenge-container">
+        <div class="challenge-image">
+          <img src="images/HomepageMasthead_Desktop.png" alt="2025 Reading Challenge">
+        </div>
+        <div class="challenge-content">
+          <h2>2025 Reading Challenge</h2>
+          <p>Challenge yourself to read more books this year. Set your goal, track your progress, and celebrate your
+            reading achievements with the Goodreads community.</p>
+          <p>Join millions of readers who have already committed to reading more this year!</p>
+          <a href="/challenges/reading-challenge" class="challenge-button">Join the Challenge</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h3>Company</h3>
+          <div class="footer-links">
+            <a href="/about/us">About Us</a>
+            <a href="/jobs">Careers</a>
+            <a href="/about/terms">Terms</a>
+            <a href="/about/privacy">Privacy</a>
+            <a href="/help">Help</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Discover</h3>
+          <div class="footer-links">
+            <a href="/recommendations">Book recommendations</a>
+            <a href="/choiceawards">Choice Awards</a>
+            <a href="/genres">Explore genres</a>
+            <a href="/giveaway">Giveaways</a>
+            <a href="/quotes">Quotes</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Community</h3>
+          <div class="footer-links">
+            <a href="/group">Groups</a>
+            <a href="/discussion">Discussions</a>
+            <a href="/topic">Topics</a>
+            <a href="/events">Events</a>
+            <a href="/blog">Blog</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Follow Us</h3>
+          <div class="footer-links">
+            <a href="https://www.facebook.com/Goodreads/">Facebook</a>
+            <a href="https://twitter.com/goodreads">Twitter</a>
+            <a href="https://www.instagram.com/goodreads/">Instagram</a>
+            <a href="https://www.linkedin.com/company/goodreads-com/">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Goodreads, Inc. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
